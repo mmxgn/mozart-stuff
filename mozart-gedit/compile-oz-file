@@ -1,0 +1,10 @@
+#!/bin/sh
+# [Gedit Tool]
+# Name=Compile Oz file
+# Shortcut=<Control>F6
+# Applicability=all
+# Output=output-panel
+# Input=nothing
+# Save-files=nothing
+
+ozc -x $GEDIT_CURRENT_DOCUMENT_NAME 

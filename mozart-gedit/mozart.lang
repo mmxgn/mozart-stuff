@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Author: Chourdakis Emmanuel <echourdakis@gmail.com>
+ Copyright (C) 2010 Chourdakis Emmanuel
+ 
+ <<
+ Based on: `scheme.lang' by Paolo Borelli <pborelli@gnome.org>
+ Copyright (C) 2006-2007 Paolo Borelli
+ <<
+ 
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Library General Public
+ License as published by the Free Software Foundation; either
+ version 2 of the License, or (at your option) any later version.
+
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Library General Public License for more details.
+
+ You should have received a copy of the GNU Library General Public
+ License along with this library; if not, write to the
+ Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ Boston, MA 02111-1307, USA.
+
+
+ TODO: Fri Jul-30 2010: Add decimal/floating point tokens, and do something with the < and > tokens.
+ 
+-->
+<language id="mozart_oz" _name="Mozart/Oz" version="2.0" _section="Sources">
+  <metadata>
+    <property name="mimetypes">text/x-oz-application</property>
+    <property name="globs">*.oz</property>
+    <property name="line-comment-start">%</property>
+  </metadata>
+
+  <styles>
+    <style id="comment" _name="Comment" map-to="def:comment"/>
+    <style id="boolean" _name="Boolean" map-to="def:boolean"/>
+    <style id="string" _name="String" map-to="def:string"/>
+    <style id="keyword" _name="Keyword" map-to="def:keyword"/>
+    <style id="variable" _name="Variable" map-to="def:function"/>
+    <style id="special-char" _name="Special Character" map-to="def:special-char"/>
+    <style id="constant" _name="Constant" map-to="def:constant"/>
+  </styles>
+
+  <definitions>
+    <context id="line-comment" style-ref="comment" end-at-line-end="true" class="comment" class-disabled="no-spell-check">
+      <start>%</start>
+      <include>
+        <context ref="def:in-comment"/>
+      </include>
+    </context>
+
+    <context id="string" style-ref="string" class="string" class-disabled="no-spell-check">
+      <start>"</start>
+      <end>"</end>
+      <include>
+        <context ref="def:escape"/>
+      </include>
+    </context>
+
+    <context id="single-quote-string" style-ref="string" class="string" class-disabled="no-spell-check">
+      <start>'</start>
+      <end>'</end>
+      <include>
+        <context ref="def:escape"/>
+      </include>
+    </context>
+
+    <context id="keyword" style-ref="keyword">
+
+      <keyword>andthen</keyword>
+      <keyword>at</keyword>
+      <keyword>attr</keyword>
+      <keyword>case</keyword>
+      <keyword>catch</keyword>
+      <keyword>choice</keyword>
+      <keyword>class</keyword>
+      <keyword>cond</keyword>
+      <keyword>condis</keyword>
+      <keyword>declare</keyword>
+      <keyword>define</keyword>
+      <keyword>dis</keyword>
+      <keyword>div</keyword>
+      <keyword>else</keyword>
+      <keyword>elsecase</keyword>
+      <keyword>elseif</keyword>
+      <keyword>end</keyword>
+      <keyword>export</keyword>
+      <keyword>fail</keyword>
+      <keyword>feat</keyword>
+      <keyword>finally</keyword>
+      <keyword>from</keyword>
+      <keyword>fun</keyword>
+      <keyword>functor</keyword>
+      <keyword>if</keyword>
+      <keyword>import</keyword>
+      <keyword>in</keyword>
+      <keyword>local</keyword>
+      <keyword>lock</keyword>
+      <keyword>meth</keyword>
+      <keyword>mod</keyword>
+      <keyword>not</keyword>
+      <keyword>of</keyword>
+      <keyword>or</keyword>
+      <keyword>orelse</keyword>
+      <keyword>prepare</keyword>
+      <keyword>proc</keyword>
+      <keyword>prop</keyword>
+      <keyword>raise</keyword>
+      <keyword>require</keyword>
+      <keyword>self</keyword>
+      <keyword>skip</keyword>
+      <keyword>then</keyword>
+      <keyword>thread</keyword>
+      <keyword>try</keyword>
+      <keyword>unit</keyword>
+    </context>
+
+    <context id="variable" style-ref="variable">
+	<keyword>[A-Z][A-Za-z0-9\_]*([\.][a-z][A-Za-z0-9\_]*)?</keyword>
+    </context>
+
+    <context id="boolean-value" style-ref="boolean">
+      <keyword>false|true</keyword>
+    </context>
+
+    <context id="atom" style-ref="constant">
+      <keyword>[a-z][A-Za-z0-9\_]*</keyword>
+    </context> 
+    <context id="special-char" style-ref="special-char">
+     <match>[\{\}\(\)\#\:\[\]\|\=\.\^\$\!\_\~\+\-\*\/\@\,]</match>
+    </context>
+    <context id="mozart_oz" class="no-spell-check">
+      <include>
+        <context ref="line-comment"/>
+        <context ref="string"/>
+	<context ref="single-quote-string"/>
+        <context ref="keyword"/>
+        <context ref="variable"/>
+        <context ref="boolean-value"/>
+	<context ref="special-char"/>
+	<context ref="atom"/> 
+      </include>
+    </context>
+
+  </definitions>
+</language>

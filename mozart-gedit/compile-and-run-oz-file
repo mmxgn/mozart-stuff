@@ -1,0 +1,12 @@
+#!/bin/sh
+# [Gedit Tool]
+# Name=Compile and Run Oz file
+# Shortcut=<Control>F5
+# Languages=
+# Applicability=all
+# Input=nothing
+# Output=output-panel
+# Save-files=nothing
+
+ozc -x $GEDIT_CURRENT_DOCUMENT_NAME && ./$(echo $GEDIT_CURRENT_DOCUMENT_NAME | sed -e 's/\.oz$//')
+
