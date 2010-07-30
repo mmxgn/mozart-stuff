@@ -1,0 +1,20 @@
+#!/bin/sh
+# [Gedit Tool]
+# Name=Run Oz file with arguments
+# Shortcut=<Control>F7
+# Applicability=all
+# Output=output-panel
+# Input=nothing
+# Save-files=nothing
+
+
+oldargs=`cat .$GEDIT_CURRENT_DOCUMENT_NAME.cmdargs`
+
+args=`zenity --entry --title="Run with arguments" --entry-text "$oldargs" --text="Give command line arguments"` ;
+
+
+fname=`echo $GEDIT_CURRENT_DOCUMENT_NAME | sed -e 's/\.oz$//'`
+
+./$fname $args
+
+echo $args > .$GEDIT_CURRENT_DOCUMENT_NAME.cmdargs
